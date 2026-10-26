@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import SiteLayout from "../components/SiteLayout";
+import SocialRail from "../components/SocialRail";
 
 function NotFoundComponent() {
   return (
@@ -58,6 +59,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "icon", type: "image/png", href: "/fav_icon.png" },
+      { rel: "apple-touch-icon", href: "/fav_icon.png" },
+
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
@@ -79,9 +83,6 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-
-import { SocialRail } from "../components/SocialRail";
-
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
@@ -91,4 +92,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

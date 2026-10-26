@@ -4,6 +4,154 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ==========================================================================
+   1. HERO KINETIC PORTAL & HEADING ANIMATIONS
+   ========================================================================== */
+
+/* Hero Title: Deep 3D Perspective Roll + Dynamic Clip Reveal */
+.hero-heading-init {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(68deg) translateY(70px) scale(0.86);
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  filter: blur(20px);
+  will-change: transform, clip-path, opacity, filter;
+  pointer-events: none;
+  transition:
+    transform 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 1.9s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1.4s ease-out,
+    filter 1.4s ease-out;
+}
+
+.hero-heading-active {
+  opacity: 1 !important;
+  transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1) !important;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  filter: blur(0px) !important;
+  pointer-events: auto !important;
+}
+
+/* Hero Content & CTA: Staggered 3D Unroll */
+.hero-content-init {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-14deg) translate3d(-60px, 35px, -30px);
+  filter: blur(14px);
+  will-change: transform, opacity, filter;
+  pointer-events: none;
+  transition:
+    transform 1.6s cubic-bezier(0.18, 0.98, 0.24, 1),
+    opacity 1.2s ease-out,
+    filter 1.2s ease-out;
+}
+
+.hero-content-active {
+  opacity: 1 !important;
+  transform: perspective(1000px) rotateY(0deg) translate3d(0, 0, 0) !important;
+  filter: blur(0px) !important;
+  pointer-events: auto !important;
+}
+
+/* Hero Image: Organic Morphing Fluid Frame */
+@keyframes fluid-portal {
+  0%, 100% {
+    border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    border-radius: 40% 60% 58% 42% / 46% 58% 42% 54%;
+    transform: translateY(-16px) rotate(1.8deg);
+  }
+  66% {
+    border-radius: 54% 46% 38% 62% / 58% 38% 62% 42%;
+    transform: translateY(-8px) rotate(-1.4deg);
+  }
+}
+
+.animate-hero-bounce {
+  animation: fluid-portal 9s ease-in-out infinite;
+  will-change: transform, border-radius;
+}
+
+/* Floating Badge Animation */
+@keyframes badge-float-subtle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(1.5deg);
+  }
+}
+
+.animate-badge-bounce {
+  animation: badge-float-subtle 4.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   2. SCROLL REVEAL SPECIAL EFFECTS (EVERY TIME ON SCROLL UP/DOWN)
+   ========================================================================== */
+
+/* Section Headings: Curtain Unfold + Perspective Rise */
+.scroll-heading-init {
+  opacity: 0;
+  transform: perspective(1100px) rotateX(72deg) translateY(60px) scale(0.88);
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  filter: blur(16px);
+  will-change: transform, clip-path, opacity, filter;
+  transition:
+    transform 1.5s cubic-bezier(0.19, 1, 0.22, 1),
+    clip-path 1.3s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 1s ease-out,
+    filter 1s ease-out;
+}
+
+.scroll-heading-active {
+  opacity: 1 !important;
+  transform: perspective(1100px) rotateX(0deg) translateY(0) scale(1) !important;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  filter: blur(0px) !important;
+}
+
+/* Paragraphs & Text: 3D Depth Slant Slide In */
+.scroll-text-init {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-18deg) translate3d(-55px, 35px, -35px);
+  filter: blur(12px);
+  will-change: transform, opacity, filter;
+  transition:
+    transform 1.4s cubic-bezier(0.2, 1, 0.28, 1),
+    opacity 1.1s ease-out,
+    filter 1.1s ease-out;
+}
+
+.scroll-text-active {
+  opacity: 1 !important;
+  transform: perspective(1000px) rotateY(0deg) translate3d(0, 0, 0) !important;
+  filter: blur(0px) !important;
+}
+
+/* Cards & Gallery Images: Isometric Origami Pop-In */
+.scroll-card-init {
+  opacity: 0;
+  transform: perspective(1400px) rotateY(22deg) rotateX(16deg) translateY(85px) scale(0.82);
+  filter: blur(15px) brightness(0.85);
+  will-change: transform, opacity, filter;
+  transition:
+    transform 1.6s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 1.2s ease-out,
+    filter 1.2s ease-out;
+}
+
+.scroll-card-active {
+  opacity: 1 !important;
+  transform: perspective(1400px) rotateY(0deg) rotateX(0deg) translateY(0) scale(1) !important;
+  filter: blur(0px) brightness(1) !important;
+}
+
+/* ==========================================================================
+   3. THEME & BASE STYLES
+   ========================================================================== */
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -42,20 +190,19 @@
 
 :root {
   --radius: 0.75rem;
-  /* Sattvalaya warm temple palette */
-  --background: oklch(0.97 0.025 78);          /* warm cream */
-  --foreground: oklch(0.22 0.04 40);           /* deep ink brown */
+  --background: #ffffff;
+  --foreground: oklch(0.22 0.04 40);
   --card: oklch(0.99 0.015 80);
   --card-foreground: oklch(0.22 0.04 40);
   --popover: oklch(0.99 0.015 80);
   --popover-foreground: oklch(0.22 0.04 40);
-  --primary: #ff7a18;                         /* bright orange */
+  --primary: #ff7a18;
   --primary-foreground: oklch(0.98 0.02 85);
-  --secondary: oklch(0.92 0.05 75);            /* sand */
+  --secondary: oklch(0.92 0.05 75);
   --secondary-foreground: oklch(0.28 0.05 40);
   --muted: oklch(0.93 0.03 78);
   --muted-foreground: oklch(0.45 0.04 50);
-  --accent: oklch(0.78 0.16 75);               /* marigold */
+  --accent: oklch(0.78 0.16 75);
   --accent-foreground: oklch(0.22 0.04 40);
   --destructive: oklch(0.57 0.22 27);
   --destructive-foreground: oklch(0.98 0.02 85);
@@ -74,7 +221,7 @@
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
   body {
-    background: linear-gradient(180deg, oklch(0.97 0.025 78) 0%, oklch(0.93 0.05 75) 100%);
+    background: #ffffff;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-weight: 600;
@@ -88,7 +235,6 @@
   p, li, span, a, button { font-weight: 500; }
   strong { font-weight: 800; }
 }
-
 
 @utility text-gradient-gold {
   background: linear-gradient(135deg, oklch(0.58 0.22 30), oklch(0.74 0.18 60), oklch(0.78 0.16 85));
@@ -108,29 +254,131 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--color-temple-gold), transparent);
   }
-  display: flex; align-items: center; gap: 1rem;
+  display: flex; 
+  align-items: center; 
+  gap: 1rem;
 }
 
 @keyframes float-slow {
   0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(3deg); }
+  50% { transform: translateY(-18px) rotate(2.5deg); }
 }
+
 @keyframes shimmer {
   0% { background-position: -200% center; }
   100% { background-position: 200% center; }
 }
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+
+.animate-float { 
+  animation: float-slow 5.5s ease-in-out infinite; 
 }
 
-.animate-float { animation: float-slow 6s ease-in-out infinite; }
-.animate-fade-up { animation: fade-up 0.8s ease-out both; }
-
+/* Glass Card with Prismatic Gold Glow */
 .glass-card {
   background: color-mix(in oklab, var(--color-card) 75%, transparent);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid color-mix(in oklab, var(--color-temple-gold) 30%, transparent);
-  box-shadow: 0 10px 40px -15px color-mix(in oklab, var(--color-vermilion) 25%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in oklab, var(--color-temple-gold) 35%, transparent);
+  box-shadow: 0 12px 35px -12px color-mix(in oklab, var(--color-vermilion) 22%, transparent);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, background-color 0.45s ease;
 }
+
+.glass-card:hover {
+  transform: translateY(-9px) scale(1.018);
+  box-shadow: 0 24px 50px -12px color-mix(in oklab, var(--color-vermilion) 35%, transparent);
+}
+
+/* Smooth Light Sweep Engine */
+.shine-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+}
+
+.shine-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shine-card::after {
+  content: "";
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 70%;
+  height: 350%;
+  transform: rotate(35deg);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255,255,255,0.08) 35%,
+    rgba(255,255,255,0.65) 50%,
+    rgba(255,255,255,0.08) 65%,
+    transparent 100%
+  );
+  transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1), top 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.shine-card:hover::before { 
+  opacity: 1; 
+}
+
+.shine-card:hover::after { 
+  left: 180%; 
+  top: 180%; 
+}
+
+.shine-card:hover {
+  transform: translateY(-9px) scale(1.02);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.16), 0 0 28px rgba(255,255,255,0.15);
+}
+
+.shine-card img { 
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); 
+}
+
+.shine-card:hover img { 
+  transform: scale(1.08); 
+}
+
+.shine-card h3, 
+.shine-card p, 
+.shine-card .inline-flex {
+  position: relative;
+  z-index: 3;
+  transition: all 0.35s ease;
+}
+
+.shine-card:hover h3 { 
+  color: #b34b29; 
+}
+
+.shine-card:hover .inline-flex {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.95);
+}
+
+/* Footer Marquee Animation CSS */
+@keyframes sv-marquee-loop {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.sv-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: sv-marquee-loop 25s linear infinite;
+}
+.sv-marquee-track:hover {
+  animation-play-state: paused;
+}
+
