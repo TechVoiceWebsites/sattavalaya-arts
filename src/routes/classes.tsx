@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import type { ElementType, ReactNode } from "react";
-import veenaImg from "@/assets/Veena.png";
+import veenaImg from "@/assets/veena.png";
 import veenaClass from "@/assets/Veena classes.webp";
 import yoga from "@/assets/YogaPose.webp";
 import nataraja from "@/assets/Natarajasana.webp";

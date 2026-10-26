@@ -9,7 +9,7 @@ import g5 from "@/assets/Meditation.webp";
 import g6 from "@/assets/Teacher.webp";
 import g7 from "@/assets/Sohanikama.webp";
 import g8 from "@/assets/Sohanikama-1.webp";
-import g9 from "@/assets/Veena.png";
+import g9 from "@/assets/veena.png";
 
 
 
