@@ -1,9 +1,9 @@
 [build]
-  command = "npm run build"
+  command = "npx cross-env NITRO_PRESET=netlify npm run build"
   publish = ".output/public"
 
 [build.environment]
-  NITRO_PRESET = "netlify"
+  NODE_VERSION = "20"
 
 [[redirects]]
   from = "/*"
